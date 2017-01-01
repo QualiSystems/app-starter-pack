@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppTemplateInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AppResourceInfo Name="App">
+    <AppResources>
+      <AppResource ModelName="Generic App Model" Driver="">
+        <Attributes>
+          <Attribute Name="Password" Value="" />
+          <Attribute Name="Public IP" Value="" />
+          <Attribute Name="User" Value="" />
+        </Attributes>
+      </AppResource>
+    </AppResources>
+    <DeploymentPaths>
+      <DeploymentPath Name="AWS- US EAST Rg" Default="true">
+        <DeploymentService Name="AWS EC2 Instance" CloudProvider="AWS EC2">
+          <Attributes>
+            <Attribute Name="AWS AMI Id" Value="" />
+            <Attribute Name="Instance Type" Value="" />
+            <Attribute Name="Storage Size" Value="0" />
+            <Attribute Name="Storage IOPS" Value="0" />
+            <Attribute Name="Storage Type" Value="auto" />
+            <Attribute Name="Inbound Ports" Value="" />
+            <Attribute Name="Outbound Ports" Value="" />
+            <Attribute Name="Wait for IP" Value="False" />
+            <Attribute Name="Wait for Status Check" Value="False" />
+            <Attribute Name="Autoload" Value="True" />
+            <Attribute Name="Wait for Credentials" Value="True" />
+            <Attribute Name="Add Public IP" Value="True" />
+            <Attribute Name="Root Volume Name" Value="" />
+            <Attribute Name="Allocate Elastic IP" Value="False" />
+          </Attributes>
+        </DeploymentService>
+      </DeploymentPath>
+    </DeploymentPaths>
+  </AppResourceInfo>
+  <Categories>
+    <Category>OS Images</Category>
+  </Categories>
+</AppTemplateInfo>

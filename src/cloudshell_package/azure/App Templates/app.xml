@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AppTemplateInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <AppResourceInfo Name="App Server">
+    <AppResources>
+      <AppResource ModelName="Generic App Model" Driver="">
+        <Attributes>
+          <Attribute Name="Password" Value="kkt2PIbJZNQ/wjhDejKUkA==" />
+          <Attribute Name="Public IP" Value="" />
+          <Attribute Name="User" Value="" />
+        </Attributes>
+      </AppResource>
+    </AppResources>
+    <DeploymentPaths>
+      <DeploymentPath Name="Azure - Azure VM From Marketplace" Default="false">
+        <DeploymentService Name="Azure VM From Marketplace" CloudProvider="Azure">
+          <Attributes>
+            <Attribute Name="VM Size" Value="Basic_A0" />
+            <Attribute Name="Instance Type" Value="" />
+            <Attribute Name="Wait for IP" Value="False" />
+            <Attribute Name="Autoload" Value="True" />
+            <Attribute Name="Add Public IP" Value="True" />
+            <Attribute Name="Extension Script file" Value="" />
+            <Attribute Name="Extension Script Configurations" Value="" />
+            <Attribute Name="Public IP Type" Value="Dynamic" />
+            <Attribute Name="Inbound Ports" Value="" />
+            <Attribute Name="Image Publisher" Value="" />
+            <Attribute Name="Image Offer" Value="" />
+            <Attribute Name="Image SKU" Value="" />
+            <Attribute Name="Image Version" Value="latest" />
+          </Attributes>
+        </DeploymentService>
+      </DeploymentPath>
+    </DeploymentPaths>
+  </AppResourceInfo>
+  <Categories>
+    <Category>OS Images</Category>
+  </Categories>
+</AppTemplateInfo>
