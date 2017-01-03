@@ -23,7 +23,7 @@ class AwsParameters:
 
 
 class AzureParameters:
-    def __init__(self, app_name, region_name, image_publisher, image_offer, image_sku, image_version='latest', vm_size='basic_A0'):
+    def __init__(self, app_name, region_name, image_publisher, image_offer, image_sku, extension_script_file=None, image_version='latest', vm_size='basic_A0'):
         self._region_name = region_name
         self._image_publisher = image_publisher
         self._image_offer = image_offer
@@ -31,6 +31,11 @@ class AzureParameters:
         self._image_version = image_version
         self._vm_size = vm_size
         self._app_name = app_name
+        self._extension_script_file = extension_script_file
+
+    @property
+    def extension_script_file(self):
+        return self._extension_script_file
 
     @property
     def app_name(self):

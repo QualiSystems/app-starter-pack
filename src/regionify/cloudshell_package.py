@@ -82,6 +82,9 @@ class CloudshellPackage:
         cp._modify_deployment_path_attribute(deployment_path, 'Image SKU', azure_params.image_sku)
         cp._modify_deployment_path_attribute(deployment_path, 'Image Version', azure_params.image_version)
         cp._modify_deployment_path_attribute(deployment_path, 'VM Size', azure_params.vm_size)
+        if azure_params.extension_script_file:
+            cp._modify_deployment_path_attribute(deployment_path, 'Extension Script file',
+                                                 azure_params.extension_script_file)
 
     @staticmethod
     def _modify_deployment_path_attribute(deployment_path, attribute, value):

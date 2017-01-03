@@ -24,19 +24,22 @@ class AppInvoice:
         return params
 
     def azure_cloud_provider_params(self):
-        AZURE_NONE_REGION = ['App Name', 'OS', 'Sku', 'Image Publisher', 'Image Offer', 'VM Size']
+        AZURE_NONE_REGION = ['App Name', 'OS', 'Sku', 'Image Publisher', 'Image Offer', 'VM Size', 'Extension Script file']
         params = []
         for key, app in self._invoice.iteritems():
             regions = [region for region in app if
                        region not in AZURE_NONE_REGION]
             for region in regions:
                 if is_not_nan(app[region]):
+                    extension_script_file = app['Extension Script file'] if is_not_nan(app['Extension Script file']) \
+                        else None
                     params.append(AzureParameters(region_name=region,
                                                   image_offer=app['Image Offer'],
                                                   image_publisher=app['Image Publisher'],
                                                   image_sku=str(app['Sku']),
                                                   app_name=app['App Name'],
-                                                  vm_size=app['VM Size']))
+                                                  vm_size=app['VM Size'],
+                                                  extension_script_file=extension_script_file))
                 continue
         return params
 
