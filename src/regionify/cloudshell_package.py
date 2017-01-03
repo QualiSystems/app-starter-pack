@@ -2,6 +2,9 @@ import os
 import shutil
 import xml.etree.ElementTree as ET
 from tempfile import mkdtemp
+
+from src.regionify.constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
+    IMAGE_PUBLISHER, INSTANCE_TYPE, AMI_ID, AWS_AMI_ID
 from src.regionify.utilities import zippit, get_files
 
 
@@ -10,8 +13,8 @@ class CloudshellPackage:
         self.src = src_package_path
 
     def prepare_aws_package(self, aws_parameters, dst_path):
-        cp_modifications = {'ami_id': aws_parameters.ami_id,
-                            'Instance Type': aws_parameters.instance_type}
+        cp_modifications = {AMI_ID: aws_parameters.ami_id,
+                            INSTANCE_TYPE: aws_parameters.instance_type}
         short_provider_name = 'aws'
         self._prepare_package(cp_modifications, aws_parameters.app_name, dst_path,
                               aws_parameters.region_name,
@@ -64,10 +67,10 @@ class CloudshellPackage:
 
     @staticmethod
     def _aws_specific_modifications(cp_modifications, deployment_path):
-        ami_id_element = deployment_path.findall("./DeploymentService//Attribute[@Name='AWS AMI Id']")[0]
-        ami_id_element.attrib['Value'] = cp_modifications['ami_id']
-        ami_id_element = deployment_path.findall("./DeploymentService//Attribute[@Name='Instance Type']")[0]
-        ami_id_element.attrib['Value'] = cp_modifications['Instance Type']
+        ami_id_element = deployment_path.findall("./DeploymentService//Attribute[@Name='%s']" % AWS_AMI_ID)[0]
+        ami_id_element.attrib['Value'] = cp_modifications[AMI_ID]
+        ami_id_element = deployment_path.findall("./DeploymentService//Attribute[@Name='%s']" % INSTANCE_TYPE)[0]
+        ami_id_element.attrib['Value'] = cp_modifications[INSTANCE_TYPE]
 
     @staticmethod
     def _azure_specific_modifications(azure_params, deployment_path):
@@ -77,13 +80,13 @@ class CloudshellPackage:
         :return:
         """
         cp = CloudshellPackage
-        cp._modify_deployment_path_attribute(deployment_path, 'Image Publisher', azure_params.image_publisher)
-        cp._modify_deployment_path_attribute(deployment_path, 'Image Offer', azure_params.image_offer)
-        cp._modify_deployment_path_attribute(deployment_path, 'Image SKU', azure_params.image_sku)
-        cp._modify_deployment_path_attribute(deployment_path, 'Image Version', azure_params.image_version)
-        cp._modify_deployment_path_attribute(deployment_path, 'VM Size', azure_params.vm_size)
+        cp._modify_deployment_path_attribute(deployment_path, IMAGE_PUBLISHER, azure_params.image_publisher)
+        cp._modify_deployment_path_attribute(deployment_path, IMAGE_OFFER, azure_params.image_offer)
+        cp._modify_deployment_path_attribute(deployment_path, IMAGE_SKU, azure_params.image_sku)
+        cp._modify_deployment_path_attribute(deployment_path, IMAGE_VERSION, azure_params.image_version)
+        cp._modify_deployment_path_attribute(deployment_path, VM_SIZE, azure_params.vm_size)
         if azure_params.extension_script_file:
-            cp._modify_deployment_path_attribute(deployment_path, 'Extension Script file',
+            cp._modify_deployment_path_attribute(deployment_path, EXTENSION_SCRIPT_FILE,
                                                  azure_params.extension_script_file)
 
     @staticmethod
