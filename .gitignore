@@ -90,5 +90,5 @@ ENV/
 # Rope project settings
 .ropeproject
 
-.idea
+.idea/
 /src/tests/~$mock_app_invoice.xlsx
