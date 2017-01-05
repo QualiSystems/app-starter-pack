@@ -2,6 +2,7 @@ from src.regionify.app_invoice import AppInvoice
 from src.regionify.cloudshell_package import CloudshellPackage
 from distutils import dir_util
 import os
+import shutil
 
 AZURE_INVOICE = '../regionify/invoices/azure_app_invoice.xlsx'
 
@@ -16,6 +17,7 @@ AZURE_DIRECTORY = '..\\..\\Packages\\Azure'
 
 
 def main():
+    shutil.rmtree(AWS_DIRECTORY)
     aws_package = CloudshellPackage(AWS_SOURCE_CLOUDSHELL_PACKAGE)
     aws_invoice = AppInvoice(AWS_INVOICE)
     for params in aws_invoice.aws_cloud_provider_params():
@@ -23,6 +25,7 @@ def main():
         dir_util.mkpath(target_path)
         aws_package.prepare_aws_package(params, target_path)
 
+    shutil.rmtree(AZURE_DIRECTORY)
     azure_package = CloudshellPackage(AZURE_SOURCE_CLOUDSHELL_PACKAGE)
     azure_invoice = AppInvoice(AZURE_INVOICE)
     for params in azure_invoice.azure_cloud_provider_params():
