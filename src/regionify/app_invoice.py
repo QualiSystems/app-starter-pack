@@ -1,7 +1,7 @@
 from pandas import ExcelFile
 import math
 
-from regionify.cp_parameters import AwsParameters, AzureParameters
+from cp_parameters import AwsParameters, AzureParameters
 
 
 class AppInvoice:

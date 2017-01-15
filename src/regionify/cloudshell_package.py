@@ -3,9 +3,9 @@ import shutil
 import xml.etree.ElementTree as ET
 from tempfile import mkdtemp
 
-from regionify.constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
+from constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
     IMAGE_PUBLISHER, INSTANCE_TYPE, AMI_ID, AWS_AMI_ID
-from regionify.utilities import zippit, get_files
+from utilities import zippit, get_files
 
 
 class CloudshellPackage:

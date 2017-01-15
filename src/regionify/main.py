@@ -1,5 +1,5 @@
-from regionify.app_invoice import AppInvoice
-from regionify.cloudshell_package import CloudshellPackage
+from app_invoice import AppInvoice
+from cloudshell_package import CloudshellPackage
 from distutils import dir_util
 import os
 import shutil
