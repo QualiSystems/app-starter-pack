@@ -1,6 +1,5 @@
 from pandas import ExcelFile
 import math
-import winrm
 
 from src.regionify.cp_parameters import AwsParameters, AzureParameters
 
