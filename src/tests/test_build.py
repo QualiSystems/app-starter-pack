@@ -1,7 +1,7 @@
 import unittest
-from src.regionify.cloudshell_package import CloudshellPackage
-from src.regionify.cp_parameters import AwsParameters, AzureParameters
-from src.regionify.app_invoice import AppInvoice
+from regionify.cloudshell_package import CloudshellPackage
+from regionify.cp_parameters import AwsParameters, AzureParameters
+from regionify.app_invoice import AppInvoice
 
 
 class TestBuild(unittest.TestCase):

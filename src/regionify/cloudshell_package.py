@@ -3,9 +3,9 @@ import shutil
 import xml.etree.ElementTree as ET
 from tempfile import mkdtemp
 
-from src.regionify.constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
+from regionify.constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
     IMAGE_PUBLISHER, INSTANCE_TYPE, AMI_ID, AWS_AMI_ID
-from src.regionify.utilities import zippit, get_files
+from regionify.utilities import zippit, get_files
 
 
 class CloudshellPackage:
@@ -75,7 +75,7 @@ class CloudshellPackage:
     @staticmethod
     def _azure_specific_modifications(azure_params, deployment_path):
         """
-        :type azure_params: src.regionify.cp_parameters.AzureParameters
+        :type azure_params: regionify.cp_parameters.AzureParameters
         :type deployment_path: xml.etree.Element
         :return:
         """
