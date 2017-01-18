@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CategoryList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.qualisystems.com/ResourceManagement/CategorySchema.xsd">
+  <Category Name="OS Images" Description="" Catalog="Service" ImagePath="OS Images.png">
+    <ChildCategories />
+  </Category>
+  <Category Name="Database Servers" Description="" Catalog="Service" ImagePath="Database Servers.png">
+    <ChildCategories />
+  </Category>
+  <Category Name="Web Servers" Description="" Catalog="Service" ImagePath="Web Servers.png">
+    <ChildCategories />
+  </Category>
+  <Category Name="App Servers" Description="" Catalog="Service" ImagePath="App Servers.png">
+    <ChildCategories />
+  </Category>
+</CategoryList>
