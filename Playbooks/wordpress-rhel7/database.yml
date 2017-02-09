@@ -1,6 +1,6 @@
 ---
 - hosts: database
-  sudo: yes
+  become: true
   remote_user: root
   vars:
     mysqlservice: mysqld
