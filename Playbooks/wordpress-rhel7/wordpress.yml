@@ -12,7 +12,6 @@
     nginx_port: 80
     auto_up_disable: false
     core_update_level: true
-    ansible_become_pass: 123qwERTY
   roles:
     - common
     - nginx
