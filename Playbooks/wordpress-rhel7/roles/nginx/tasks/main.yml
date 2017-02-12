@@ -1,4 +1,7 @@
 ---
+
+  become: true
+
 - name: Install nginx
   yum: name=http://nginx.org/packages/mainline/centos/7/x86_64/RPMS/nginx-1.11.0-1.el7.ngx.x86_64.rpm state=present
 

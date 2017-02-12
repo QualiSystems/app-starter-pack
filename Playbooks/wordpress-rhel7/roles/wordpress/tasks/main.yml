@@ -1,4 +1,7 @@
 ---
+
+  become: true
+  
 - name: Install MariaDB package
   yum: name={{ item }} state=installed
   with_items:

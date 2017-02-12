@@ -1,5 +1,6 @@
 ---
 # This playbook will install MariaDB and create db user and give permissions.
+become: true
 
 - name: Install MariaDB package
   yum: name={{ item }} state=installed
