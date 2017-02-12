@@ -1,6 +1,4 @@
 ---
-
-  become: true
 - name: Install php-fpm and deps
   yum: name={{ item }} state=present
   with_items:
