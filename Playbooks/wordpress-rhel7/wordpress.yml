@@ -1,6 +1,6 @@
 ---
 - hosts: wordpress
-  become: true
+  become: yes
   remote_user: root
   vars:
     wp_version: 4.6
@@ -12,7 +12,7 @@
     nginx_port: 80
     auto_up_disable: false
     core_update_level: true
-    ansible_become_pass: 123qwERTY
+    ansible_become_pass: "{{ansible_ssh_pass}}"
   roles:
     - common
     - nginx
