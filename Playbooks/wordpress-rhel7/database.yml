@@ -1,6 +1,5 @@
 ---
 - hosts: database
-  become: yes
   remote_user: root
   vars:
     mysqlservice: mysqld
@@ -8,7 +7,6 @@
     wp_db_name: wordpress
     wp_db_user: wordpress
     wp_db_password: secret
-    ansible_become_pass: "{{ansible_ssh_pass}}"
   roles:
     - common
     - mariadb
