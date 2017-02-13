@@ -15,8 +15,6 @@
         <DeploymentService Name="Azure VM From Marketplace" CloudProvider="Azure">
           <Attributes>
             <Attribute Name="VM Size" Value="Basic_A0" />
-            <Attribute Name="Instance Type" Value="" />
-            <Attribute Name="Wait for IP" Value="False" />
             <Attribute Name="Autoload" Value="True" />
             <Attribute Name="Add Public IP" Value="True" />
             <Attribute Name="Extension Script file" Value="" />
