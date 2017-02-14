@@ -43,7 +43,14 @@ define('DB_COLLATE', '');
  * @since 2.6.0
  */
 
-{{ wp_salt.stdout }}
+define('AUTH_KEY',         'y9.s]dQr<S:L=oyuHUmdtzc{^lp_b/fvt_/ !{6w#D97Sbg6z#H<P^Z(uM0)r! I');
+define('SECURE_AUTH_KEY',  'yLlOeqD]-LWojg5MHcJ!kjrP+}WE~6.~cjeNACg-i-K^+[Fdpm,m&umuE:(8.Kf{');
+define('LOGGED_IN_KEY',    'e{*-Wld~UW0zu.}~[F?4yK:9 D_YN5[+F$V ]anP@r>*m[Qfg!XOUk3O,7y4H>Ph');
+define('NONCE_KEY',        '|WC,m(Q+O|(k^z-3&6d|,SVH&{)t}Bw9`-!mC&Qg+-LOi)d<gzdqB|4#D%;@NJq[');
+define('AUTH_SALT',        'L-)L.os?7e(-2;-r(EF+$Q4#b-%4}$ W$]p@,,K6C`~T|JL8[$TAo|kHv F,YcRQ');
+define('SECURE_AUTH_SALT', '}(+A/4JQAUG@0Q(5Rd+Z_nILt-pBy3[+E|Lwe:hj#n+28gacKs1~@+W&t[nPH~TX');
+define('LOGGED_IN_SALT',   'z.+]r&t(1{;XmDnKYKPyj344JG^8rfNwKu_0,@T1f+kP1{DeIq=,RGL-I.JZA~~-');
+define('NONCE_SALT',       '?V3ei@,v9/XwDs0qF|op+h)N&IWym#4L1C,y3XZA(~JFVB43jArZSR$G?Z+a~4<%');
 
 /**#@-*/
 
