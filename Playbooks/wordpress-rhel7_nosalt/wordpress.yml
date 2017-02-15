@@ -1,0 +1,18 @@
+---
+- hosts: wordpress
+  remote_user: root
+  vars:
+    wp_version: 4.6
+    wp_sha256sum: c1856cf969b1e73025ba2c681491908c3a4a6c5a2333f4531bf9bfb90f634380
+    wp_db_name: wordpress
+    wp_db_user: wordpress
+    wp_db_password: secret
+    mysql_port: 3306
+    nginx_port: 80
+    auto_up_disable: false
+    core_update_level: true
+  roles:
+    - common
+    - nginx
+    - php-fpm
+    - wordpress
