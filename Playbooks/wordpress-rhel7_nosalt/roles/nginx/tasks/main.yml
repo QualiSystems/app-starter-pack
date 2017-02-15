@@ -1,14 +1,17 @@
 ---
 - name: Install nginx
   yum: name=http://nginx.org/packages/mainline/centos/7/x86_64/RPMS/nginx-1.11.0-1.el7.ngx.x86_64.rpm state=present
+  sudo: yes
 
 - name: Copy nginx configuration for wordpress
   template: src=default.conf dest=/etc/nginx/conf.d/default.conf
   notify: restart nginx
+  sudo: yes
   
 - name: insert firewalld rule for nginx
   firewalld: port={{ nginx_port }}/tcp permanent=true state=enabled immediate=yes
   ignore_errors: yes
+  sudo: yes
 
 - name: http service state
   service: name=nginx state=started enabled=yes
