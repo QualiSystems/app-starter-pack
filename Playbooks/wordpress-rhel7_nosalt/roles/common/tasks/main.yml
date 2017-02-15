@@ -25,6 +25,19 @@
   
 - name: Install Firewalld
   yum: name=firewalld state=present
+  sudo: yes
+
+- name: Restart Daemon
+  command: systemctl daemon-reload
+  sudo: yes  
+
+- name: Restart Firewalld
+  command: systemctl restart firewalld
+  sudo: yes
+
+- name: Enable Firewalld
+  command: systemctl enable firewalld
+  sudo: yes
 
 - name: Firewalld service state
   service: name=firewalld state=started enabled=yes
