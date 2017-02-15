@@ -25,6 +25,7 @@
 
 - name: Start MariaDB Service
   service: name=mariadb state=started enabled=yes
+  sudo: yes
 
 - name: insert firewalld rule
   firewalld: port={{ mysql_port }}/tcp permanent=true state=enabled immediate=yes
@@ -33,6 +34,8 @@
 
 - name: Create WordPress database
   mysql_db: name={{ wp_db_name }} state=present
+  sudo: yes
 
 - name: Create WordPress database user
   mysql_user: name={{ wp_db_user }} password={{ wp_db_password }} priv={{ wp_db_name }}.*:ALL host='{{ groups['wordpress'][0] }}' state=present
+  sudo: yes
