@@ -1,42 +1,55 @@
 ---
 - name: Copy the NGINX repository definition
   copy: src=nginx.repo dest=/etc/yum.repos.d/
+  become: true
+  become_user: centos
 
 - name: Copy the EPEL repository definition
   copy: src=epel.repo dest=/etc/yum.repos.d/
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Copy the REMI repository definition
   copy: src=remi.repo dest=/etc/yum.repos.d/
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Create the GPG key for NGINX
   copy: src=RPM-GPG-KEY-NGINX dest=/etc/pki/rpm-gpg
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Create the GPG key for EPEL
   copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Create the GPG key for REMI
   copy: src=RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg
-  sudo: yes
+  become: true
+  become_user: centos
   
 - name: Install Firewalld
   yum: name=firewalld state=present
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Restart Daemon
   command: systemctl daemon-reload
-  sudo: yes  
+  become: true
+  become_user: centos
 
 - name: Restart Firewalld
   command: systemctl restart firewalld
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Enable Firewalld
   command: systemctl enable firewalld
-  sudo: yes
+  become: true
+  become_user: centos
 
 - name: Firewalld service state
   service: name=firewalld state=started enabled=yes
+  become: true
+  become_user: centos
