@@ -1,6 +1,6 @@
 ---
 - hosts: database
-  remote_user: root
+  remote_user: centos
   vars:
     mysqlservice: mysqld
     mysql_port: 3306

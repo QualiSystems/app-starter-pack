@@ -1,6 +1,6 @@
 ---
 - hosts: wordpress
-  remote_user: root
+  remote_user: centos
   vars:
     wp_version: 4.6
     wp_sha256sum: c1856cf969b1e73025ba2c681491908c3a4a6c5a2333f4531bf9bfb90f634380
