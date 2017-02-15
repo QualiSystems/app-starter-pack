@@ -1,12 +1,15 @@
 ---
 - name: Copy the NGINX repository definition
   copy: src=nginx.repo dest=/etc/yum.repos.d/
+  sudo: yes
 
 - name: Copy the EPEL repository definition
   copy: src=epel.repo dest=/etc/yum.repos.d/
+  sudo: yes
 
 - name: Copy the REMI repository definition
   copy: src=remi.repo dest=/etc/yum.repos.d/
+  sudo: yes
 
 - name: Create the GPG key for NGINX
   copy: src=RPM-GPG-KEY-NGINX dest=/etc/pki/rpm-gpg
