@@ -13,12 +13,15 @@
 
 - name: Create the GPG key for NGINX
   copy: src=RPM-GPG-KEY-NGINX dest=/etc/pki/rpm-gpg
+  sudo: yes
 
 - name: Create the GPG key for EPEL
   copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg
+  sudo: yes
 
 - name: Create the GPG key for REMI
   copy: src=RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg
+  sudo: yes
   
 - name: Install Firewalld
   yum: name=firewalld state=present
