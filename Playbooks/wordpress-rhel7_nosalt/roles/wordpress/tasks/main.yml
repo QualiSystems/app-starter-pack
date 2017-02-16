@@ -71,6 +71,7 @@
 
 - name: Start php-fpm Service
   service: name=php-fpm state=started enabled=yes
+  sudo: yes
 
 - name: set SELINUX into permissive mode 1
   command: setsebool httpd_can_network_connect_db on
