@@ -3,4 +3,4 @@
 
 - name: restart mariadb
   service: name=mariadb state=restarted
-  sudo: yes
+  become: true

@@ -1,7 +1,7 @@
 ---
 - name: Install MariaDB package
   yum: name={{ item }} state=installed
-  sudo: yes
+  become: true
   with_items:
    - mariadb-server
    - MySQL-python
@@ -11,76 +11,76 @@
 - name: Download WordPress
   get_url: url=http://wordpress.org/wordpress-{{ wp_version }}.tar.gz dest=/srv/wordpress-{{ wp_version }}.tar.gz
            sha256sum="{{ wp_sha256sum }}"
-  sudo: yes
+  become: true
 
 - name: Extract archive
   command: chdir=/srv/ /bin/tar xvf wordpress-{{ wp_version }}.tar.gz creates=/srv/wordpress
-  sudo: yes
+  become: true
 
 - name: Add group "wordpress"
   group: name=wordpress
-  sudo: yes
+  become: true
 
 - name: Add user "wordpress"
   user: name=wordpress group=wordpress home=/srv/wordpress/
-  sudo: yes
+  become: true
   
 - name: Copy WordPress config file
   template: src=wp-config.php dest=/srv/wordpress/
-  sudo: yes
+  become: true
 
 - name: Change ownership of WordPress installation
   file: path=/srv/wordpress/ owner=wordpress group=wordpress state=directory recurse=yes
-  sudo: yes
+  become: true
 
 - name: install SEManage
   yum: pkg=policycoreutils-python state=present
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for the Wordpress directory
   command: semanage fcontext -a -t httpd_sys_content_t "/srv/wordpress(/.*)?"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for wp-config.php
   command: semanage fcontext -a -t httpd_sys_script_exec_t "/srv/wordpress/wp-config\.php"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for wp-content directory
   command: semanage fcontext -a -t httpd_sys_rw_content_t "/srv/wordpress/wp-content(/.*)?"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for the *.php files
   command: semanage fcontext -a -t httpd_sys_script_exec_t "/srv/wordpress/.*\.php"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for the Upgrade directory
   command: semanage fcontext -a -t httpd_sys_rw_content_t "/srv/wordpress/wp-content/upgrade(/.*)?"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for the Uploads directory
   command: semanage fcontext -a -t httpd_sys_rw_content_t "/srv/wordpress/wp-content/uploads(/.*)?"
-  sudo: yes
+  become: true
 
 - name: set the SELinux policy for the wp-includes php files
   command: semanage fcontext -a -t httpd_sys_script_exec_t "/srv/wordpress/wp-includes/.*\.php"
-  sudo: yes
+  become: true
 
 - name: set the SELinux on all the Files
   command: restorecon -Rv /srv/wordpress
-  sudo: yes
+  become: true
 
 - name: Start php-fpm Service
   service: name=php-fpm state=started enabled=yes
-  sudo: yes
+  become: true
 
 - name: set SELINUX into permissive mode 1
   command: setsebool httpd_can_network_connect_db on
-  sudo: yes
+  become: true
 
 - name: set SELINUX into permissive mode 2
   command: setsebool httpd_can_network_connect on
-  sudo: yes
+  become: true
 
 - name: set SELINUX into permissive mode 3
   command: setenforce 0
-  sudo: yes
+  become: true
