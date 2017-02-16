@@ -1,16 +1,6 @@
 ---
 # Handler to handle DB tier notifications
-- name: Restart mariadb
-  command: systemctl daemon-reload
-  sudo: yes  
 
-- name: Restart mariadb
-  command: systemctl restart mariadb
+- name: restart mariadb
+  service: name=mariadb state=restarted
   sudo: yes
-
-- name: Enable mariadb
-  command: systemctl enable mariadb
-  sudo: yes
-
-- name: mariadb service state
-  service: name=mariadb state=started enabled=yes
