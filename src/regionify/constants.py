@@ -7,3 +7,4 @@ IMAGE_PUBLISHER = 'Image Publisher'
 INSTANCE_TYPE = 'Instance Type'
 AMI_ID = 'ami_id'
 AWS_AMI_ID = "AWS AMI Id"
+LOGO_PATH = 'Logo Path'
