@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from tempfile import mkdtemp
 
 from constants import EXTENSION_SCRIPT_FILE, VM_SIZE, IMAGE_VERSION, IMAGE_SKU, IMAGE_OFFER, \
-    IMAGE_PUBLISHER, INSTANCE_TYPE, AMI_ID, AWS_AMI_ID
+    IMAGE_PUBLISHER, INSTANCE_TYPE, AMI_ID, AWS_AMI_ID, LOGO_PATH
 from utilities import zippit, get_files
 
 
@@ -14,30 +14,44 @@ class CloudshellPackage:
 
     def prepare_aws_package(self, aws_parameters, dst_path):
         cp_modifications = {AMI_ID: aws_parameters.ami_id,
-                            INSTANCE_TYPE: aws_parameters.instance_type}
+                            INSTANCE_TYPE: aws_parameters.instance_type
+                            }
         short_provider_name = 'aws'
         self._prepare_package(cp_modifications, aws_parameters.app_name, dst_path,
                               aws_parameters.region_name,
-                              short_provider_name, CloudshellPackage._aws_specific_modifications)
+                              short_provider_name, CloudshellPackage._aws_specific_modifications, aws_parameters.logo_path)
 
     def prepare_azure_package(self, azure_parameters, dst_path):
         short_provider_name = 'azure'
         self._prepare_package(azure_parameters, azure_parameters.app_name, dst_path,
                               azure_parameters.region_name,
-                              short_provider_name, CloudshellPackage._azure_specific_modifications)
+                              short_provider_name, CloudshellPackage._azure_specific_modifications,
+                              azure_parameters.logo_path)
 
     def _prepare_package(self, cp_modifications, app_name, dst_path, region_name,
-                         short_provider_name, cp_modifier_func):
+                         short_provider_name, cp_modifier_func, logo_path):
         source_dir = os.path.join(mkdtemp(), short_provider_name)
         try:
             shutil.copytree(self.src, source_dir)
             datamodel_path = self._get_app_datamodel_file(source_dir)
             self._modify_datamodel_file(cp_modifications, app_name, datamodel_path, region_name,
-                                        cp_modifier_func)
+                                        cp_modifier_func, logo_path)
+            self._copy_logo_to_package_source_dir(logo_path, source_dir)
             self._prepare_package_archive(app_name, source_dir, dst_path, region_name, short_provider_name)
         except Exception as e:
             shutil.rmtree(source_dir)
             raise e
+
+    def _copy_logo_to_package_source_dir(self, logo_path, package_source_dir):
+        file_name = logo_path.replace('\\', '/').split('/')[-1]
+        if logo_path == '':
+            return
+        if not os.path.exists(logo_path):
+            # maybe its relative path
+            logo_path = os.path.join('..', 'cloudshell_package', logo_path)
+            if not os.path.exists(logo_path):
+                raise Exception('Bad logo path\n"{0}" not found'.format(logo_path))
+        shutil.copy(logo_path, os.path.join(package_source_dir, 'App Templates', file_name))
 
     def _prepare_package_archive(self, app_name, package_source_path, dst_path, region_name, short_provider_name):
         archive_name = self._get_package_archive_name(app_name, region_name, short_provider_name)
@@ -50,11 +64,13 @@ class CloudshellPackage:
 
     @staticmethod
     def _modify_datamodel_file(cp_values, app_name, datamodel_path, region_name,
-                               cp_modifier_func):
+                               cp_modifier_func, logo_path):
         tree = ET.parse(datamodel_path)
         app_root = tree.getroot()
         app_resource_info = app_root.find('./AppResourceInfo')
         app_resource_info.attrib['Name'] = app_name
+        if logo_path != '':
+            app_resource_info.attrib['ImagePath'] = logo_path.replace('\\', '/').split('/')[-1]
         deployment_path = app_root.findall('.//DeploymentPath')[0]
         deployment_service = deployment_path.find('./DeploymentService')
         deployment_service.attrib['CloudProvider'] = '{0}_{1}'.format(deployment_service.attrib['CloudProvider'],

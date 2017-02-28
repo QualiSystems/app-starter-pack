@@ -1,9 +1,10 @@
 class AwsParameters:
-    def __init__(self, app_name, ami_id, instance_type, region_name):
+    def __init__(self, app_name, ami_id, instance_type, region_name, logo_path):
         self._instance_type = instance_type
         self._ami_id = ami_id
         self._region_name = region_name
         self._app_name = app_name
+        self._logo_path = logo_path
 
     @property
     def app_name(self):
@@ -21,9 +22,14 @@ class AwsParameters:
     def region_name(self):
         return self._region_name
 
+    @property
+    def logo_path(self):
+        return self._logo_path
+
 
 class AzureParameters:
-    def __init__(self, app_name, region_name, image_publisher, image_offer, image_sku, extension_script_file=None, image_version='latest', vm_size='basic_A0'):
+    def __init__(self, app_name, region_name, image_publisher, image_offer, image_sku, extension_script_file=None,
+                 image_version='latest', vm_size='basic_A0', logo_path=''):
         self._region_name = region_name
         self._image_publisher = image_publisher
         self._image_offer = image_offer
@@ -32,6 +38,7 @@ class AzureParameters:
         self._vm_size = vm_size
         self._app_name = app_name
         self._extension_script_file = extension_script_file
+        self._logo_path = logo_path
 
     @property
     def extension_script_file(self):
@@ -64,3 +71,7 @@ class AzureParameters:
     @property
     def image_version(self):
         return self._image_version
+
+    @property
+    def logo_path(self):
+        return self._logo_path
