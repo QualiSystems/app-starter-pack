@@ -1,3 +1,4 @@
+https://github.com/QualiSystems/devguide_source/raw/master/logo.png
 # Preconfigured Apps
 > A repository for Cloudshell Apps.
 
