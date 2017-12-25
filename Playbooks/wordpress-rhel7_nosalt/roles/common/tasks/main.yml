@@ -1,0 +1,49 @@
+---
+- name: Wait for Vm to Load {{ inventory_hostname }}
+  local_action: wait_for host={{ inventory_hostname }} port=22 state=started delay=0 timeout=600
+
+- name: gather facts
+  setup:
+      
+- name: Copy the NGINX repository definition
+  copy: src=nginx.repo dest=/etc/yum.repos.d/
+  become: true
+
+- name: Copy the EPEL repository definition
+  copy: src=epel.repo dest=/etc/yum.repos.d/
+  become: true
+
+- name: Copy the REMI repository definition
+  copy: src=remi.repo dest=/etc/yum.repos.d/
+  become: true
+
+- name: Create the GPG key for NGINX
+  copy: src=RPM-GPG-KEY-NGINX dest=/etc/pki/rpm-gpg
+  become: true
+
+- name: Create the GPG key for EPEL
+  copy: src=RPM-GPG-KEY-EPEL-7 dest=/etc/pki/rpm-gpg
+  become: true
+
+- name: Create the GPG key for REMI
+  copy: src=RPM-GPG-KEY-remi dest=/etc/pki/rpm-gpg
+  become: true
+  
+- name: Install Firewalld
+  yum: name=firewalld state=present
+  become: true
+
+- name: Restart Daemon
+  command: systemctl daemon-reload
+  become: true  
+
+- name: Restart Firewalld
+  command: systemctl restart firewalld
+  become: true
+
+- name: Enable Firewalld
+  command: systemctl enable firewalld
+  become: true
+
+- name: Firewalld service state
+  service: name=firewalld state=started enabled=yes

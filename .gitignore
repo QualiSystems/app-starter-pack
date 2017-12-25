@@ -92,3 +92,4 @@ ENV/
 
 .idea/
 /src/tests/~$mock_app_invoice.xlsx
+/src/regionify/invoices/~$azure_app_invoice.xlsx
